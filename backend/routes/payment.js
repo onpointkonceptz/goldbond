@@ -270,4 +270,5 @@ router.get('/config/public-key', (req, res) => {
 // -------------------------
 // Export router correctly
 // -------------------------
+
 module.exports = router;
