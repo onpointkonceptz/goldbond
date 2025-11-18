@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - GOLDBOND LABORATORIES</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="../logo.png" alt="Goldbond Logo" class="logo-img">
+                    <div class="logo-text">
+                        <span class="logo-main">GOLDBOND LABORATORIES</span>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="results.html" class="btn-test-results">Test Results</a></li>
+                    <li><a href="login.html" class="btn-login">LOG IN</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1> Create Your Account</h1>
+        <p>Register to access your test results and more</p>
+    </section>
+
+    <!-- Register Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="auth-container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Register New Account</h2>
+                <form id="registerFormElement">
+                    <div class="form-group">
+                        <label for="registerFullName">Full Name *</label>
+                        <input type="text" id="registerFullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="registerEmail">Email *</label>
+                            <input type="email" id="registerEmail" name="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">Phone *</label>
+                            <input type="tel" id="registerPhone" name="phone" placeholder="08012345678" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="registerPassword">Password *</label>
+                            <input type="password" id="registerPassword" name="password" placeholder="Min. 6 characters" minlength="6" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" minlength="6" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="registerDOB">Date of Birth</label>
+                            <input type="date" id="registerDOB" name="dateOfBirth">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerGender">Gender</label>
+                            <select id="registerGender" name="gender">
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerAddress">Address</label>
+                        <textarea id="registerAddress" name="address" rows="2" placeholder="Your address (optional)"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <div style="margin-top: 2rem; text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <p style="color: var(--gray-dark);">
+                        Already have an account? 
+                        <a href="login.html" style="color: var(--primary-gold); text-decoration: none; font-weight: 600;">
+                            Login here
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> GOLDBOND LABORATORIES</h3>
+                    <p>Your trusted partner in healthcare diagnostics, delivering accurate results with care and compassion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-x"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="results.html">Test Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Laboratory Tests</a></li>
+                        <li><a href="services.html">Blood Banking</a></li>
+                        <li><a href="services.html">Pathology</a></li>
+                        <li><a href="services.html">Home Collection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 08035944767, 08023340925</li>
+                        <li><i class="fas fa-envelope"></i>goldbondlabs@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 7AM - 9PM</li>
+                        <li> </li><i class="fas fa-map-marker-alt"> </i><p> </i>     Dialogue Close by Daraja Supermarket, Shehu Laminu Road by Tafawa Balewa Way, U/Rimi Kaduna</p>
+                            
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GOLDBOND LABORATORIES. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Button -->
+    <div class="chatbot-button" id="chatbotButton" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 25px; vertical-align: middle; margin-right: 8px;"> Goldbond Lab AI Assistant</h3>
+            <button class="chatbot-close" id="closeChatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">
+                <p>Hello! I'm Goldbond Lab AI Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/chatbot.js"></script>
+    
+    <script>
+        // Register Handler
+        document.getElementById('registerFormElement')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                window.GOLDBOND.showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            const formData = {
+                fullName: document.getElementById('registerFullName').value,
+                email: document.getElementById('registerEmail').value,
+                phone: document.getElementById('registerPhone').value,
+                password: password,
+                dateOfBirth: document.getElementById('registerDOB').value,
+                gender: document.getElementById('registerGender').value,
+                address: document.getElementById('registerAddress').value
+            };
+            
+            window.GOLDBOND.showLoading();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                window.GOLDBOND.hideLoading();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    window.GOLDBOND.showNotification('Account created successfully! Redirecting to login...', 'success');
+                    document.getElementById('registerFormElement').reset();
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                } else {
+                    const error = await response.json();
+                    window.GOLDBOND.showNotification(error.message || 'Registration failed', 'error');
+                }
+            } catch (error) {
+                window.GOLDBOND.hideLoading();
+                console.error('Registration error:', error);
+                window.GOLDBOND.showNotification('Unable to register. Please try again later.', 'error');
+            }
+        });
+
+        // Check if already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                window.GOLDBOND.showNotification('You are already logged in. Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'results.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>

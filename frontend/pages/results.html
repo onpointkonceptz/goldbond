@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test Results - GOLDBOND LABORATORIES</title>
+        <link rel="icon" type="image/png" href="../logo.png">
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+<body>
+
+    <!-- Header & Navigation -->
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="../logo.png" alt="Goldbond Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="logo-main">GOLDBOND LABORATORIES</span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="results.html" class="btn-test-results active">Test Results</a></li>
+                <li><a href="login.html" class="btn-login">LOG IN</a></li>
+            </ul>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-file-medical"></i> Test Results Portal</h1>
+        <p>Access your medical test reports securely</p>
+    </section>
+
+    <!-- Results Content -->
+    <section class="page-content">
+        <div class="container">
+            <!-- Authentication Section -->
+            <div id="authSection" class="auth-container">
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <a href="register.html" class="auth-tab" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Register</a>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form active">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Login to Your Account</h2>
+                    <form id="loginFormElement">
+                        <div class="form-group">
+                            <label for="loginEmail">
+                                <i class="fas fa-envelope"></i> Email *
+                            </label>
+                            <input type="email" id="loginEmail" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">
+                                <i class="fas fa-lock"></i> Password *
+                            </label>
+                            <input type="password" id="loginPassword" name="password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" class="auth-form">
+                    <h2 style="text-align: center; margin-bottom: 2rem;">Create New Account</h2>
+                    <form id="registerFormElement">
+                        <div class="form-group">
+                            <label for="registerFullName">Full Name *</label>
+                            <input type="text" id="registerFullName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerEmail">Email *</label>
+                                <input type="email" id="registerEmail" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="registerPhone">Phone *</label>
+                                <input type="tel" id="registerPhone" name="phone" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerPassword">Password *</label>
+                                <input type="password" id="registerPassword" name="password" minlength="6" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password *</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" minlength="6" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registerDOB">Date of Birth</label>
+                                <input type="date" id="registerDOB" name="dateOfBirth">
+                            </div>
+                            <div class="form-group">
+                                <label for="registerGender">Gender</label>
+                                <select id="registerGender" name="gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerAddress">Address</label>
+                            <textarea id="registerAddress" name="address" rows="2"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color); text-align: center;">
+                    <p style="color: var(--gray-dark);">
+                        <i class="fas fa-info-circle"></i> 
+                        After logging in, you'll need your Registration Number and Diagnostic Number to view test results
+                    </p>
+                </div>
+            </div>
+
+            <!-- Access Results Section (After Login) -->
+            <div id="accessResultsSection" style="display: none;">
+                <div class="auth-container">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h2>Welcome, <span id="userName"></span>!</h2>
+                        <button onclick="logout()" class="btn btn-secondary" style="margin-top: 1rem;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+
+                    <h3 style="margin-bottom: 1.5rem;">Access Your Test Results</h3>
+                    <form id="resultsAccessForm">
+                        <div class="form-group">
+                            <label for="registrationNumber">
+                                <i class="fas fa-id-card"></i> Registration Number *
+                            </label>
+                            <input 
+                                type="text" 
+                                id="registrationNumber" 
+                                name="registrationNumber" 
+                                placeholder="e.g., GOLD123456789"
+                                required>
+                            <small style="color: var(--gray-dark);">Find this on your receipt or confirmation email</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="diagnosticNumber">
+                                <i class="fas fa-barcode"></i> Diagnostic Number *
+                            </label>
+                            <input 
+                                type="text" 
+                                id="diagnosticNumber" 
+                                name="diagnosticNumber" 
+                                placeholder="e.g., DIAG987654321"
+                                required>
+                            <small style="color: var(--gray-dark);">Unique number provided with your test sample</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-search"></i> View Results
+                        </button>
+                    </form>
+
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                        <h4 style="margin-bottom: 1rem;">Your Previous Results</h4>
+                        <div id="previousResults">
+                            <p style="text-align: center; color: var(--gray-dark);">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Display Section -->
+            <div id="resultsSection" style="display: none;">
+                <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 15px; box-shadow: var(--shadow); max-width: 900px; margin: 0 auto; border: 2px solid var(--primary-gold);">
+                    <!-- Results Header -->
+                    <div style="text-align: center; padding-bottom: 2rem; border-bottom: 2px solid var(--border-color);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <div style="text-align: left;">
+                                <h3 style="margin: 0; color: var(--primary-gold);">GOLDBOND LABORATORIES</h3>
+                                <p style="margin: 0; font-size: 0.8rem; color: var(--text-color);">Consultant Laboratories for All Pathology Request and Blood Banking</p>
+                            </div>
+                        </div>
+                        <h2 style="margin: 1rem 0; color: var(--text-color);">Test Report</h2>
+                    </div>
+
+                    <!-- Patient Information -->
+                    <div id="patientInfo" style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Test Results Table -->
+                    <div style="margin-top: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--text-color);">Test Results</h3>
+                        <table id="resultsTable" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: var(--gray-light);">
+                                    <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color);">Parameter</th>
+                                    <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color);">Value</th>
+                                    <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color);">Unit</th>
+                                    <th style="padding: 1rem; text-align: left; border: 1px solid var(--border-color);">Normal Range</th>
+                                    <th style="padding: 1rem; text-align: center; border: 1px solid var(--border-color);">Flag</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Doctor's Remarks -->
+                    <div id="remarksSection" style="margin-top: 2rem; padding: 1.5rem; background: var(--gray-light); border-radius: 10px; border-left: 4px solid var(--primary-gold);">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Pathologist Signature -->
+                    <div id="signatureSection" style="margin-top: 2rem; text-align: right;">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="window.print()" class="btn btn-primary">
+                            <i class="fas fa-print"></i> Print Report
+                        </button>
+                        <button onclick="downloadResults()" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Download PDF
+                        </button>
+                        <button onclick="backToAccess()" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+
+                    <!-- Disclaimer -->
+                    <div style="margin-top: 2rem; padding: 1rem; background: #fff3cd; border-left: 4px solid #D4AF37; border-radius: 5px;">
+                        <p style="margin: 0; font-size: 0.9rem; color: #856404;">
+                            <strong>Important:</strong> This report is for informational purposes only. Please consult your physician for proper interpretation and medical advice.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> GOLDBOND LABORATORIES</h3>
+                    <p>Your trusted partner in healthcare diagnostics, delivering accurate results with care and compassion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-x"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="diagnostics.html">Diagnostics</a></li>
+                        <li><a href="results.html">Test Results</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="consultancy.html">Consultancy</a></li>
+                        <li><a href="research.html">Research</a></li>
+                        <li><a href="training.html">Training</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                    </ul>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 08035944767, 08023340925</li>
+                        <li><i class="fas fa-envelope"></i>goldbondlabs@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 7AM - 9PM</li>
+                        <li> </li><i class="fas fa-map-marker-alt"> </i><p> </i>     Dialogue Close by Daraja Supermarket, Shehu Laminu Road by Tafawa Balewa Way, U/Rimi Kaduna</p>
+                            
+                       
+                    </ul>
+                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GOLDBOND LABORATORIES.  | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Button -->
+    <div class="chatbot-button" id="chatbotButton" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 25px; vertical-align: middle; margin-right: 8px;"> Goldbond Lab AI Assistant</h3>
+            <button class="chatbot-close" id="closeChatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">
+                <p>Hello! I'm Goldbond Lab AI Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/chatbot.js"></script>
+    
+    <script>
+        // Store current user
+        let currentUser = null;
+
+        // Tab switching
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const tabName = tab.getAttribute('data-tab');
+                document.getElementById(tabName + 'Form').classList.add('active');
+            });
+        });
+
+        // Register Handler
+        document.getElementById('registerFormElement')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                window.GOLDBOND.showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            const formData = {
+                fullName: document.getElementById('registerFullName').value,
+                email: document.getElementById('registerEmail').value,
+                phone: document.getElementById('registerPhone').value,
+                password: password,
+                dateOfBirth: document.getElementById('registerDOB').value,
+                gender: document.getElementById('registerGender').value,
+                address: document.getElementById('registerAddress').value
+            };
+            
+            window.GOLDBOND.showLoading();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                window.GOLDBOND.hideLoading();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    window.GOLDBOND.showNotification('Account created successfully! Please login.', 'success');
+                    document.getElementById('registerFormElement').reset();
+                    // Switch to login tab
+                    document.querySelector('[data-tab="login"]').click();
+                } else {
+                    const error = await response.json();
+                    window.GOLDBOND.showNotification(error.message || 'Registration failed', 'error');
+                }
+            } catch (error) {
+                window.GOLDBOND.hideLoading();
+                console.error('Registration error:', error);
+                window.GOLDBOND.showNotification('Unable to register. Please try again later.', 'error');
+            }
+        });
+
+        // Login Handler
+        document.getElementById('loginFormElement')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+            
+            window.GOLDBOND.showLoading();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                window.GOLDBOND.hideLoading();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    currentUser = data.user;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    window.GOLDBOND.showNotification('Login successful!', 'success');
+                    showAccessResultsSection();
+                } else {
+                    const error = await response.json();
+                    window.GOLDBOND.showNotification(error.message || 'Login failed', 'error');
+                }
+            } catch (error) {
+                window.GOLDBOND.hideLoading();
+                console.error('Login error:', error);
+                window.GOLDBOND.showNotification('Unable to login. Please try again later.', 'error');
+            }
+        });
+
+        // Show access results section after login
+        function showAccessResultsSection() {
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('accessResultsSection').style.display = 'block';
+            document.getElementById('userName').textContent = currentUser.fullName;
+            loadPreviousResults();
+        }
+
+        // Load previous results
+        async function loadPreviousResults() {
+            try {
+                const response = await fetch(`http://localhost:3000/api/auth/user/${currentUser.id}/results`);
+                const data = await response.json();
+                
+                const container = document.getElementById('previousResults');
+                if (data.success && data.results.length > 0) {
+                    container.innerHTML = data.results.map(result => `
+                        <div style="padding: 1rem; margin-bottom: 0.5rem; background: var(--gray-light); border-radius: 8px; border-left: 3px solid var(--primary-gold);">
+                            <strong>${result.testName}</strong><br>
+                            <small>Date: ${new Date(result.reportDate).toLocaleDateString()}</small><br>
+                            <small>Reg: ${result.registrationNumber}</small>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p style="text-align: center; color: var(--gray-dark);">No previous results found</p>';
+                }
+            } catch (error) {
+                console.error('Error loading results:', error);
+                document.getElementById('previousResults').innerHTML = '<p style="text-align: center; color: var(--gray-dark);">Unable to load previous results</p>';
+            }
+        }
+
+        // Access Results Handler
+        document.getElementById('resultsAccessForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const credentials = {
+                userId: currentUser.id,
+                registrationNumber: document.getElementById('registrationNumber').value,
+                diagnosticNumber: document.getElementById('diagnosticNumber').value
+            };
+            
+            window.GOLDBOND.showLoading();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/results', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(credentials)
+                });
+                
+                window.GOLDBOND.hideLoading();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResults(data.result);
+                } else {
+                    const error = await response.json();
+                    window.GOLDBOND.showNotification(error.message || 'No results found. Please check your credentials.', 'error');
+                }
+            } catch (error) {
+                window.GOLDBOND.hideLoading();
+                console.error('Results access error:', error);
+                window.GOLDBOND.showNotification('Unable to fetch results. Please try again later.', 'error');
+            }
+        });
+
+        // Display Results Function
+        function displayResults(result) {
+            document.getElementById('accessResultsSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Populate patient info
+            const patientInfo = document.getElementById('patientInfo');
+            patientInfo.innerHTML = `
+                <div>
+                    <p style="margin: 0.5rem 0;"><strong>Registration No:</strong> ${result.registrationNumber}</p>
+                    <p style="margin: 0.5rem 0;"><strong>Diagnostic No:</strong> ${result.diagnosticNumber}</p>
+                    <p style="margin: 0.5rem 0;"><strong>Patient Name:</strong> ${result.patientName}</p>
+                    <p style="margin: 0.5rem 0;"><strong>Age/Gender:</strong> ${result.age} / ${result.gender}</p>
+                </div>
+                <div>
+                    <p style="margin: 0.5rem 0;"><strong>Test Name:</strong> ${result.testName}</p>
+                    <p style="margin: 0.5rem 0;"><strong>Sample Date:</strong> ${new Date(result.sampleCollectionDate).toLocaleDateString()}</p>
+                    <p style="margin: 0.5rem 0;"><strong>Report Date:</strong> ${new Date(result.reportDate).toLocaleDateString()}</p>
+                </div>
+            `;
+            
+            // Populate test results table
+            const tbody = document.getElementById('resultsTableBody');
+            tbody.innerHTML = '';
+            
+            result.testResults.forEach(test => {
+                const row = tbody.insertRow();
+                const flagColor = test.flag === 'Normal' ? '#D4AF37' : 
+                                test.flag === 'High' || test.flag === 'Low' ? '#ffa500' : '#ff6b6b';
+                
+                row.innerHTML = `
+                    <td style="padding: 1rem; border: 1px solid var(--border-color); color: var(--text-color);">${test.parameter}</td>
+                    <td style="padding: 1rem; border: 1px solid var(--border-color); color: var(--text-color);"><strong>${test.value}</strong></td>
+                    <td style="padding: 1rem; border: 1px solid var(--border-color); color: var(--text-color);">${test.unit}</td>
+                    <td style="padding: 1rem; border: 1px solid var(--border-color); color: var(--text-color);">${test.normalRange}</td>
+                    <td style="padding: 1rem; border: 1px solid var(--border-color); text-align: center;">
+                        <span style="background: ${flagColor}; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.85rem;">
+                            ${test.flag}
+                        </span>
+                    </td>
+                `;
+            });
+            
+            // Populate remarks
+            if (result.doctorRemarks) {
+                document.getElementById('remarksSection').innerHTML = `
+                    <h4 style="margin-bottom: 0.5rem; color: var(--text-color);">Doctor's Remarks</h4>
+                    <p style="margin: 0; color: var(--text-color);">${result.doctorRemarks}</p>
+                `;
+            }
+            
+            // Populate signature
+            if (result.pathologistName) {
+                document.getElementById('signatureSection').innerHTML = `
+                    <p style="margin: 0.5rem 0; color: var(--text-color);"><strong>Pathologist:</strong> ${result.pathologistName}</p>
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--gray-dark);">Digitally Verified</p>
+                `;
+            }
+        }
+
+        // Back to access
+        function backToAccess() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('accessResultsSection').style.display = 'block';
+            document.getElementById('resultsAccessForm').reset();
+        }
+
+        // Logout function
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            document.getElementById('accessResultsSection').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('authSection').style.display = 'block';
+            document.getElementById('loginFormElement').reset();
+            window.GOLDBOND.showNotification('Logged out successfully', 'success');
+        }
+
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showAccessResultsSection();
+            }
+        });
+
+        // Download results function
+        function downloadResults() {
+            window.GOLDBOND.showNotification('Preparing download...', 'success');
+            setTimeout(() => {
+                window.GOLDBOND.showNotification('Download feature coming soon!', 'success');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

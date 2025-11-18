@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GOLDBOND LABORATORIES</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="../logo.png" alt="Goldbond Logo" class="logo-img">
+                    <div class="logo-text">
+                        <span class="logo-main">GOLDBOND LABORATORIES</span>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="results.html" class="btn-test-results">Test Results</a></li>
+                    <li><a href="login.html" class="btn-login active">LOG IN</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1></i> Login to Your Account</h1>
+        <p>Access your dashboard and test results</p>
+    </section>
+
+    <!-- Login Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="auth-container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Welcome Back</h2>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label for="loginEmail">
+                            <i class="fas fa-envelope"></i> Email Address *
+                        </label>
+                        <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i> Password *
+                        </label>
+                        <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+
+                <div style="margin-top: 2rem; text-align: center; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                    <p style="color: var(--gray-dark);">
+                        Don't have an account? 
+                        <a href="register.html" style="color: var(--primary-gold); text-decoration: none; font-weight: 600;">
+                            Register here
+                        </a>
+                    </p>
+                </div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <p style="color: var(--gray-dark); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> 
+                        After logging in, you'll be redirected to your <a href="dashboard.html" style="color: var(--primary-gold);">personal dashboard</a> to manage your tests and results
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> GOLDBOND LABORATORIES</h3>
+                    <p>Your trusted partner in healthcare diagnostics, delivering accurate results with care and compassion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-x"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="results.html">Test Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Laboratory Tests</a></li>
+                        <li><a href="services.html">Blood Banking</a></li>
+                        <li><a href="services.html">Pathology</a></li>
+                        <li><a href="services.html">Home Collection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 08035944767, 08023340925</li>
+                        <li><i class="fas fa-envelope"></i>goldbondlabs@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 7AM - 9PM</li>
+                        <li> </li><i class="fas fa-map-marker-alt"> </i><p> </i>     Dialogue Close by Daraja Supermarket, Shehu Laminu Road by Tafawa Balewa Way, U/Rimi Kaduna</p>
+                            
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GOLDBOND LABORATORIES. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Button -->
+    <div class="chatbot-button" id="chatbotButton" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 25px; vertical-align: middle; margin-right: 8px;"> Goldbond Lab AI Assistant</h3>
+            <button class="chatbot-close" id="closeChatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">
+                <p>Hello! I'm Goldbond Lab AI Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/chatbot.js"></script>
+    
+    <script>
+        // Login Handler - Updated to redirect to dashboard
+        document.getElementById('loginFormElement')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+            
+            window.GOLDBOND.showLoading();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                window.GOLDBOND.hideLoading();
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    if (data.token) {
+                        localStorage.setItem('authToken', data.token);
+                    }
+                    window.GOLDBOND.showNotification('Login successful! Redirecting to dashboard...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                } else {
+                    const error = await response.json();
+                    window.GOLDBOND.showNotification(error.message || 'Login failed', 'error');
+                }
+            } catch (error) {
+                window.GOLDBOND.hideLoading();
+                console.error('Login error:', error);
+                window.GOLDBOND.showNotification('Unable to login. Please try again later.', 'error');
+            }
+        });
+
+        // Check if already logged in - Updated to redirect to dashboard
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                window.GOLDBOND.showNotification('You are already logged in. Redirecting to dashboard...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>

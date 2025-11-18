@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - GOLDBOND LABORATORIES</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="../logo.png" alt="Goldbond Logo" class="logo-img">
+                    <div class="logo-text">
+                        <span class="logo-main">GOLDBOND LABORATORIES</span>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="results.html" class="btn-test-results">Test Results</a></li>
+                    <li><a href="login.html" class="btn-login">Log in</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-envelope"></i> Contact Us</h1>
+        <p>We're here to help! Get in touch with us</p>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="page-content">
+        <div class="container">
+            <!-- Contact Information Cards -->
+            <div class="content-grid" style="margin-bottom: 3rem;">
+                <div class="content-card" style="text-align: center;">
+                    <i class="fas fa-phone" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;"></i>
+                    <h3>Call Us</h3>
+                    <p><strong>Phone Lines:</strong></p>
+                    <p><a href="tel:+2348035944767" style="color: var(--primary-gold); text-decoration: none;">08035944767</a></p>
+                    <p><a href="tel:+2348023340925" style="color: var(--primary-gold); text-decoration: none;">08023340925</a></p>
+                </div>
+                
+                <div class="content-card" style="text-align: center;">
+                    <i class="fas fa-envelope" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;"></i>
+                    <h3>Email Us</h3>
+                    <p><strong>General Inquiries:</strong></p>
+                    <p><a href="mailto:info@goldbondlabs.com" style="color: var(--primary-gold); text-decoration: none;">info@goldbondlabs.com</a></p>
+                </div>
+                
+                <div class="content-card" style="text-align: center;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: var(--primary-gold); margin-bottom: 1rem;"></i>
+                    <h3>Visit Us</h3>
+                    <p><strong>Laboratory Address:</strong></p>
+                    <p>Dialogue Close by Daraja Supermarket,<br>Shehu Laminu Road by Tafawa Balewa Way,<br>U/Rimi Kaduna</p>
+                    <p><strong>Hours:</strong></p>
+                    <p>Mon-Sat: 7AM - 9PM</p>
+                </div>
+            </div>
+
+            <!-- Contact Form and Map Section -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                <!-- Contact Form -->
+                <div class="content-card">
+                    <h2 style="margin-bottom: 1.5rem; color: var(--text-color);">Send Us a Message</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="contactName">Full Name *</label>
+                            <input type="text" id="contactName" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactEmail">Email *</label>
+                            <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactPhone">Phone</label>
+                            <input type="tel" id="contactPhone" name="phone" placeholder="08012345678">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactSubject">Subject *</label>
+                            <input type="text" id="contactSubject" name="subject" placeholder="What is this about?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactMessage">Message *</label>
+                            <textarea id="contactMessage" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Google Map -->
+                <div>
+                    <h2 style="margin-bottom: 1.5rem; color: var(--text-color);">Find Us on Map</h2>
+                    <div class="map-container" style="border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); border: 2px solid var(--primary-gold);">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.0524856547397!2d7.425861!3d10.526302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDMxJzM0LjciTiA3wrAyNSczMy4xIkU!5e0!3m2!1sen!2sng!4v1234567890"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    
+                    <!-- Quick Directions -->
+                    <div style="margin-top: 1rem; padding: 1.5rem; background: var(--gray-light); border-radius: 10px; border-left: 4px solid var(--primary-gold);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-color);">Quick Directions</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-color);">
+                            <strong>Landmark:</strong> Near Daraja Supermarket
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-color);">
+                            <strong>Main Road:</strong> Shehu Laminu Road by Tafawa Balewa Way
+                        </p>
+                        <p style="font-size: 0.9rem; color: var(--text-color);">
+                            <strong>Area:</strong> U/Rimi, Kaduna
+                        </p>
+                        <a href="https://maps.app.goo.gl/UjPWp7EX62VdRFvz8" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="content-section">
+                <h2 style="color: var(--text-color);">Frequently Asked Questions</h2>
+                <div class="content-card">
+                    <h4 style="color: var(--text-color);">What are your operating hours?</h4>
+                    <p style="color: var(--gray-dark);">Our laboratory is open Monday-Saturday from 7AM to 9PM. We are closed on Sundays.</p>
+                </div>
+                <div class="content-card">
+                    <h4 style="color: var(--text-color);">Do you offer home sample collection?</h4>
+                    <p style="color: var(--gray-dark);">Yes! We offer FREE home sample collection service. Book online or call us to schedule your home collection.</p>
+                </div>
+                <div class="content-card">
+                    <h4 style="color: var(--text-color);">How long do test results take?</h4>
+                    <p style="color: var(--gray-dark);">Most routine tests are completed within 24-48 hours. Specialized tests may take 3-7 days. You'll be notified via SMS and email when results are ready.</p>
+                </div>
+                <div class="content-card">
+                    <h4 style="color: var(--text-color);">How can I access my test results?</h4>
+                    <p style="color: var(--gray-dark);">You can access your test results online through our <a href="results.html" style="color: var(--primary-gold);">Test Results Portal</a>. You'll need your Registration Number and Diagnostic Number.</p>
+                </div>
+            </div>
+
+            <!-- Alternative Contact Methods -->
+            <div class="content-section" style="background: linear-gradient(135deg, var(--black) 0%, var(--gray-dark) 100%); padding: 3rem; border-radius: 15px; color: white; text-align: center; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, var(--primary-gold) 0%, transparent 100%); opacity: 0.1;"></div>
+                <div style="position: relative; z-index: 1;">
+                    <h2 style="color: white; margin-bottom: 2rem;">Need Immediate Assistance?</h2>
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://wa.me/2348035944767?text=Hi, I need help with my test" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                        <a href="tel:+2348035944767" class="btn btn-primary">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                        <a href="../index.html#book-test" class="btn btn-secondary">
+                            <i class="fas fa-calendar-check"></i> Book a Test
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> GOLDBOND LABORATORIES</h3>
+                    <p>Your trusted partner in healthcare diagnostics, delivering accurate results with care and compassion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-x"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="results.html">Test Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Laboratory Tests</a></li>
+                        <li><a href="services.html">Blood Banking</a></li>
+                        <li><a href="services.html">Pathology</a></li>
+                        <li><a href="services.html">Home Collection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 08035944767, 08023340925</li>
+                        <li><i class="fas fa-envelope"></i>goldbondlabs@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 7AM - 9PM</li>
+                        <li> </li><i class="fas fa-map-marker-alt"> </i><p> </i>     Dialogue Close by Daraja Supermarket, Shehu Laminu Road by Tafawa Balewa Way, U/Rimi Kaduna</p>
+                            
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GOLDBOND LABORATORIES.| <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Button -->
+    <div class="chatbot-button" id="chatbotButton" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 25px; vertical-align: middle; margin-right: 8px;"> Goldbond Lab AI Assistant</h3>
+            <button class="chatbot-close" id="closeChatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">
+                <p>Hello! I'm Goldbond Lab AI Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/chatbot.js"></script>
+    
+    <script>
+        // Contact Form Handler
+        document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                subject: document.getElementById('contactSubject').value,
+                message: document.getElementById('contactMessage').value
+            };
+            
+            window.GOLDBOND.showLoading();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                window.GOLDBOND.hideLoading();
+                
+                if (response.ok) {
+                    window.GOLDBOND.showNotification('Thank you! Your message has been sent successfully.', 'success');
+                    document.getElementById('contactForm').reset();
+                } else {
+                    const error = await response.json();
+                    window.GOLDBOND.showNotification(error.message || 'Failed to send message. Please try again.', 'error');
+                }
+            } catch (error) {
+                window.GOLDBOND.hideLoading();
+                console.error('Contact form error:', error);
+                window.GOLDBOND.showNotification('Unable to send message. Please contact us directly.', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

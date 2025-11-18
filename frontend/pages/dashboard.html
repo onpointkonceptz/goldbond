@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GOLDBOND LABORATORIES</title>
+    <link rel="icon" type="image/png" href="../logo.png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Dashboard-specific enhancements - keeping your color scheme */
+        .dashboard-container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+            background: var(--bg-darker);
+        }
+
+        .dashboard-sidebar {
+            width: 280px;
+            background: var(--bg-dark);
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 80px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .dashboard-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .dashboard-sidebar::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+
+        .dashboard-sidebar::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 3px;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .user-avatar {
+            margin: 0 auto 1rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--bg-dark);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .user-avatar i {
+            font-size: 2.5rem;
+        }
+
+        /* Profile Picture Upload Section */
+        .profile-picture-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-picture-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--bg-dark);
+            border: 4px solid var(--border-color);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-picture i {
+            font-size: 4rem;
+        }
+
+        .profile-picture-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .profile-picture-wrapper:hover .profile-picture-overlay {
+            opacity: 1;
+        }
+
+        .profile-picture-overlay i {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-picture-overlay span {
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .picture-upload-input {
+            display: none;
+        }
+
+        .picture-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .picture-actions .btn {
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .user-info h3 {
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        .user-info p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            word-break: break-word;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--primary-gold);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+        }
+
+        .sidebar-item.active {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--primary-gold);
+        }
+
+        .sidebar-item.active::before {
+            transform: scaleY(1);
+        }
+
+        .sidebar-item i {
+            width: 24px;
+            text-align: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar-item span {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .notification-badge {
+            background: var(--danger);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .dashboard-main {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-width: 0;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-title {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .dashboard-title h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            word-break: break-word;
+        }
+
+        .dashboard-title p {
+            color: var(--text-secondary);
+        }
+
+        .dashboard-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .dashboard-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .dashboard-card:hover {
+            border-color: var(--primary-gold);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .card-header h3 i {
+            color: var(--primary-gold);
+            flex-shrink: 0;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .profile-item {
+            margin-bottom: 0;
+        }
+
+        .profile-item label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .profile-item span {
+            display: block;
+            color: var(--text-primary);
+            font-size: 1rem;
+            padding: 0.75rem;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            word-break: break-word;
+        }
+
+        .profile-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .password-input {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            z-index: 2;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-gold);
+        }
+
+        .form-help {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .list-container {
+            margin-top: 1.5rem;
+        }
+
+        .list-item {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .list-item:hover {
+            border-color: var(--primary-gold);
+            transform: translateX(5px);
+        }
+
+        .list-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .list-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            word-break: break-word;
+        }
+
+        .list-item-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .status-badge.completed {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-badge.processing {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--info);
+        }
+
+        .list-item-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .action-btn.primary {
+            background: var(--primary-gold);
+            color: var(--bg-dark);
+        }
+
+        .action-btn.primary:hover {
+            background: var(--dark-gold);
+        }
+
+        .action-btn.secondary {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary-gold);
+            border: 1px solid var(--primary-gold);
+        }
+
+        .action-btn.secondary:hover {
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        .action-btn.danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .action-btn.danger:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--text-secondary);
+            opacity: 0.5;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            gap: 1rem;
+        }
+
+        .modal-header h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .message-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .message-icon.success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .message-icon.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+
+        .modal-body {
+            text-align: center;
+        }
+
+        .modal-body h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+        }
+
+        .modal-body p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            word-break: break-word;
+        }
+
+        .payment-summary {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .payment-item span {
+            word-break: break-word;
+        }
+
+        .payment-item span:first-child {
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .payment-item span:last-child {
+            text-align: right;
+        }
+
+        .payment-item:last-child {
+            border-bottom: none;
+        }
+
+        .payment-item.total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            padding-top: 1rem;
+            margin-top: 0.5rem;
+            border-top: 2px solid var(--primary-gold);
+        }
+
+        .payment-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-sidebar-toggle {
+            display: none;
+        }
+
+        /* Sidebar overlay for mobile */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 1024px) {
+            .dashboard-main {
+                padding: 1.5rem;
+            }
+
+            .dashboard-title h1 {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+
+            .dashboard-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                transform: translateX(-100%);
+                z-index: 999;
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+            }
+
+            .dashboard-sidebar.active {
+                transform: translateX(0);
+            }
+
+            .mobile-sidebar-toggle {
+                display: inline-flex;
+            }
+
+            .dashboard-main {
+                padding: 1rem;
+                width: 100%;
+            }
+
+            .dashboard-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dashboard-title h1 {
+                font-size: 1.5rem;
+            }
+
+            .dashboard-actions {
+                justify-content: flex-end;
+            }
+
+            .dashboard-card {
+                padding: 1.5rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .card-header h3 {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .list-item {
+                padding: 1rem;
+            }
+
+            .list-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .status-badge {
+                align-self: flex-start;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                width: calc(100% - 2rem);
+            }
+
+            .modal-header h3 {
+                font-size: 1.25rem;
+            }
+
+            .payment-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .payment-item span:last-child {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-main {
+                padding: 0.75rem;
+            }
+
+            .dashboard-card {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+
+            .dashboard-title h1 {
+                font-size: 1.25rem;
+            }
+
+            .card-header h3 {
+                font-size: 1.1rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 0.75rem 1.25rem;
+            }
+
+            .user-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+
+            .empty-state i {
+                font-size: 3rem;
+            }
+
+            .profile-picture {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .profile-picture-overlay i {
+                font-size: 1.5rem;
+            }
+
+            .picture-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .picture-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="../logo.png" alt="Goldbond Logo" class="logo-img">
+                    <div class="logo-text">
+                        <span class="logo-main">GOLDBOND</span>
+                        <span class="logo-sub">LABORATORIES</span>
+                    </div>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="results.html" class="btn-test-results">Test Results</a></li>
+                    <li><a href="#" class="btn-login" id="logoutBtn">LOG OUT</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar Overlay for Mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Sidebar Navigation -->
+        <div class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-header">
+                <div class="user-avatar" id="sidebarAvatar">
+                    <img src="" alt="Profile" id="sidebarAvatarImg" style="display: none;">
+                    <i class="fas fa-user-circle" id="sidebarAvatarIcon"></i>
+                </div>
+                <div class="user-info">
+                    <h3 id="userWelcome">Welcome, User</h3>
+                    <p id="userEmail">Loading...</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#profile" class="sidebar-item active" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile Information</span>
+                </a>
+                <a href="#test-results" class="sidebar-item" data-section="test-results">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Test Results</span>
+                </a>
+                <a href="#bookings" class="sidebar-item" data-section="bookings">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>My Bookings</span>
+                </a>
+                <a href="#book-test" class="sidebar-item" data-section="book-test">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Book New Test</span>
+                </a>
+                <a href="#payments" class="sidebar-item" data-section="payments">
+                    <i class="fas fa-credit-card"></i>
+                    <span>Payment History</span>
+                </a>
+                <a href="#notifications" class="sidebar-item" data-section="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications</span>
+                    <span class="notification-badge" id="notificationBadge">3</span>
+                </a>
+                <a href="#change-password" class="sidebar-item" data-section="change-password">
+                    <i class="fas fa-lock"></i>
+                    <span>Change Password</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="dashboard-main">
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1 id="sectionTitle">Profile Information</h1>
+                    <p id="sectionSubtitle">Manage your personal information and account settings</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-secondary mobile-sidebar-toggle" id="mobileSidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Sections -->
+            <div class="dashboard-content">
+                
+                <!-- Profile Section -->
+                <section id="profile-section" class="dashboard-section active">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user"></i> Personal Information</h3>
+                            <button class="btn btn-primary" id="editProfileBtn">
+                                <i class="fas fa-edit"></i> Edit Profile
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <!-- Profile Picture Section -->
+                            <div class="profile-picture-section">
+                                <div class="profile-picture-wrapper">
+                                    <div class="profile-picture" id="profilePictureDisplay">
+                                        <img src="" alt="Profile Picture" id="profilePictureImg" style="display: none;">
+                                        <i class="fas fa-user-circle" id="profilePictureIcon"></i>
+                                    </div>
+                                    <div class="profile-picture-overlay" id="profilePictureOverlay">
+                                        <i class="fas fa-camera"></i>
+                                        <span>Change Photo</span>
+                                    </div>
+                                    <input type="file" id="profilePictureInput" class="picture-upload-input" accept="image/*">
+                                </div>
+                                <div class="picture-actions">
+                                    <button type="button" class="btn btn-primary" id="uploadPictureBtn">
+                                        <i class="fas fa-upload"></i> Upload Photo
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" id="removePictureBtn" style="display: none;">
+                                        <i class="fas fa-trash"></i> Remove Photo
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Profile View Mode -->
+                            <div class="profile-view" id="profileView">
+                                <div class="profile-grid">
+                                    <div class="profile-item">
+                                        <label>Full Name</label>
+                                        <span id="displayName">Loading...</span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <label>Email Address</label>
+                                        <span id="displayEmail">Loading...</span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <label>Phone Number</label>
+                                        <span id="displayPhone">Loading...</span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <label>Date of Birth</label>
+                                        <span id="displayDob">Not provided</span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <label>Gender</label>
+                                        <span id="displayGender">Not provided</span>
+                                    </div>
+                                    <div class="profile-item">
+                                        <label>Blood Group</label>
+                                        <span id="displayBloodGroup">Not provided</span>
+                                    </div>
+                                    <div class="profile-item full-width">
+                                        <label>Address</label>
+                                        <span id="displayAddress">Not provided</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Profile Edit Mode -->
+                            <div class="profile-edit" id="profileEdit" style="display: none;">
+                                <form id="updateProfileForm">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Full Name *</label>
+                                            <input type="text" id="editName" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone Number *</label>
+                                            <input type="tel" id="editPhone" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <input type="date" id="editDob">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Gender</label>
+                                            <select id="editGender">
+                                                <option value="">Select Gender</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Blood Group</label>
+                                            <select id="editBloodGroup">
+                                                <option value="">Select Blood Group</option>
+                                                <option value="A+">A+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B+">B+</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="O+">O+</option>
+                                                <option value="O-">O-</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <textarea id="editAddress" rows="3"></textarea>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> Save Changes
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" id="cancelEditBtn">
+                                            <i class="fas fa-times"></i> Cancel
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Test Results Section -->
+                <section id="test-results-section" class="dashboard-section">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-file-medical"></i> Your Test Results</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-container" id="testResultsList">
+                                <div class="empty-state">
+                                    <i class="fas fa-file-medical-alt"></i>
+                                    <h3>No Test Results Yet</h3>
+                                    <p>Your test results will appear here once they're available.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bookings Section -->
+                <section id="bookings-section" class="dashboard-section">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-calendar-alt"></i> My Appointments</h3>
+                            <button class="btn btn-primary" onclick="switchSection('book-test')">
+                                <i class="fas fa-plus"></i> New Booking
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-container" id="bookingsList">
+                                <div class="empty-state">
+                                    <i class="fas fa-calendar-times"></i>
+                                    <h3>No Appointments</h3>
+                                    <p>You don't have any appointments scheduled yet.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Book Test Section -->
+                <section id="book-test-section" class="dashboard-section">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-plus-circle"></i> Book New Test</h3>
+                        </div>
+                        <div class="card-content">
+                            <form id="bookingForm">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Test Type *</label>
+                                        <select id="bookingTestType" required>
+                                            <option value="">Select Test Type</option>
+                                            <option value="blood-count">Complete Blood Count (CBC)</option>
+                                            <option value="lipid">Lipid Profile</option>
+                                            <option value="glucose">Blood Glucose Test</option>
+                                            <option value="liver">Liver Function Test</option>
+                                            <option value="kidney">Kidney Function Test</option>
+                                            <option value="thyroid">Thyroid Function Test</option>
+                                            <option value="urine">Urine Analysis</option>
+                                            <option value="hiv">HIV Screening</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Appointment Date *</label>
+                                        <input type="date" id="bookingDate" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Preferred Time *</label>
+                                        <select id="bookingTime" required>
+                                            <option value="">Select Time</option>
+                                            <option value="08:00">08:00 AM</option>
+                                            <option value="09:00">09:00 AM</option>
+                                            <option value="10:00">10:00 AM</option>
+                                            <option value="11:00">11:00 AM</option>
+                                            <option value="12:00">12:00 PM</option>
+                                            <option value="14:00">02:00 PM</option>
+                                            <option value="15:00">03:00 PM</option>
+                                            <option value="16:00">04:00 PM</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Collection Type *</label>
+                                        <select id="collectionType" required>
+                                            <option value="">Select Collection Type</option>
+                                            <option value="lab">Visit Laboratory</option>
+                                            <option value="home">Home Collection</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Special Instructions (Optional)</label>
+                                    <textarea id="bookingNotes" rows="3" placeholder="Any special requirements or health conditions we should know about..."></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-calendar-check"></i> Book Appointment
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Payments Section -->
+                <section id="payments-section" class="dashboard-section">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-credit-card"></i> Payment History</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-container" id="paymentsList">
+                                <div class="empty-state">
+                                    <i class="fas fa-receipt"></i>
+                                    <h3>No Payment History</h3>
+                                    <p>Your payment transactions will appear here.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notifications Section -->
+                <section id="notifications-section" class="dashboard-section">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-bell"></i> Notifications</h3>
+                            <button class="btn btn-secondary" id="markAllReadBtn">
+                                <i class="fas fa-check-double"></i> Mark All Read
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="list-container" id="notificationsList">
+                                <div class="list-item" style="border-left: 4px solid var(--primary-gold);">
+                                    <div class="list-item-header">
+                                        <div>
+                                            <div class="list-item-title">Test Result Available</div>
+                                            <div class="list-item-subtitle">2 hours ago</div>
+                                        </div>
+                                        <span class="status-badge pending">New</span>
+                                    </div>
+                                    <p>Your blood glucose test results are now ready to view.</p>
+                                </div>
+
+                                <div class="list-item" style="border-left: 4px solid var(--info);">
+                                    <div class="list-item-header">
+                                        <div>
+                                            <div class="list-item-title">Appointment Reminder</div>
+                                            <div class="list-item-subtitle">1 day ago</div>
+                                        </div>
+                                        <span class="status-badge processing">Read</span>
+                                    </div>
+                                    <p>You have an appointment tomorrow at 9:00 AM.</p>
+                                </div>
+
+                                <div class="list-item">
+                                    <div class="list-item-header">
+                                        <div>
+                                            <div class="list-item-title">Payment Successful</div>
+                                            <div class="list-item-subtitle">3 days ago</div>
+                                        </div>
+                                        <span class="status-badge completed">Read</span>
+                                    </div>
+                                    <p>Your payment of ₦15,000 has been received successfully.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Change Password Section -->
+                <section id="change-password-section" class="dashboard-section">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-lock"></i> Change Password</h3>
+                        </div>
+                        <div class="card-content">
+                            <form id="changePasswordForm">
+                                <div class="form-group">
+                                    <label>Current Password *</label>
+                                    <div class="password-input">
+                                        <input type="password" id="currentPassword" required>
+                                        <button type="button" class="password-toggle" data-target="currentPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>New Password *</label>
+                                    <div class="password-input">
+                                        <input type="password" id="newPassword" required minlength="6">
+                                        <button type="button" class="password-toggle" data-target="newPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <small class="form-help">Password must be at least 6 characters long</small>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm New Password *</label>
+                                    <div class="password-input">
+                                        <input type="password" id="confirmPassword" required>
+                                        <button type="button" class="password-toggle" data-target="confirmPassword">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-key"></i> Update Password
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Modal -->
+    <div id="messageModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="message-icon" id="messageIcon"></div>
+                <h3 id="messageTitle"></h3>
+                <p id="messageText"></p>
+                <button class="btn btn-primary" id="modalOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Complete Payment</h3>
+                <button class="close-modal" id="closePaymentModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-summary">
+                    <div class="payment-item">
+                        <span>Test Type:</span>
+                        <span id="paymentTestType"></span>
+                    </div>
+                    <div class="payment-item">
+                        <span>Appointment Date:</span>
+                        <span id="paymentDate"></span>
+                    </div>
+                    <div class="payment-item">
+                        <span>Registration Number:</span>
+                        <span id="paymentRegNumber"></span>
+                    </div>
+                    <div class="payment-item total">
+                        <span>Total Amount:</span>
+                        <span id="paymentAmount">₦0</span>
+                    </div>
+                </div>
+                <div class="payment-actions">
+                    <button class="btn btn-primary" id="proceedPaymentBtn">
+                        <i class="fas fa-credit-card"></i> Pay with Paystack
+                    </button>
+                    <button class="btn btn-secondary" id="cancelPaymentBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 30px; vertical-align: middle; margin-right: 8px;"> GOLDBOND LABORATORIES</h3>
+                    <p>Your trusted partner in healthcare diagnostics, delivering accurate results with care and compassion.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-x"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="results.html">Test Results</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services.html">Laboratory Tests</a></li>
+                        <li><a href="services.html">Blood Banking</a></li>
+                        <li><a href="services.html">Pathology</a></li>
+                        <li><a href="services.html">Home Collection</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 08035944767, 08023340925</li>
+                        <li><i class="fas fa-envelope"></i>goldbondlabs@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 7AM - 9PM</li>
+                        <li> </li><i class="fas fa-map-marker-alt"> </i><p> </i>     Dialogue Close by Daraja Supermarket, Shehu Laminu Road by Tafawa Balewa Way, U/Rimi Kaduna</p>
+                            
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GOLDBOND LABORATORIES. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot Button -->
+    <div class="chatbot-button" id="chatbotButton" title="Chat with us">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h3><img src="../logo.png" alt="Goldbond Logo" style="height: 25px; vertical-align: middle; margin-right: 8px;"> Goldbond Lab AI Assistant</h3>
+            <button class="chatbot-close" id="closeChatbot">×</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">
+                <p>Hello! I'm Goldbond Lab AI Assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your question...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/chatbot.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script>
+        // Mobile Sidebar Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('dashboardSidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+
+            // Toggle sidebar on mobile
+            if (mobileSidebarToggle) {
+                mobileSidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                    sidebarOverlay.classList.toggle('active');
+                });
+            }
+
+            // Close sidebar when overlay is clicked
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', function() {
+                    sidebar.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                });
+            }
+
+            // Close sidebar when a menu item is clicked on mobile
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        sidebarOverlay.classList.remove('active');
+                    }
+                });
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                }
+            });
+
+            // Profile Picture Upload Functionality
+            const profilePictureInput = document.getElementById('profilePictureInput');
+            const profilePictureImg = document.getElementById('profilePictureImg');
+            const profilePictureIcon = document.getElementById('profilePictureIcon');
+            const profilePictureOverlay = document.getElementById('profilePictureOverlay');
+            const uploadPictureBtn = document.getElementById('uploadPictureBtn');
+            const removePictureBtn = document.getElementById('removePictureBtn');
+            const sidebarAvatarImg = document.getElementById('sidebarAvatarImg');
+            const sidebarAvatarIcon = document.getElementById('sidebarAvatarIcon');
+
+            // Load saved profile picture from localStorage
+            function loadProfilePicture() {
+                const savedImage = localStorage.getItem('profilePicture');
+                if (savedImage) {
+                    displayProfilePicture(savedImage);
+                }
+            }
+
+            // Display profile picture
+            function displayProfilePicture(imageData) {
+                // Main profile picture
+                profilePictureImg.src = imageData;
+                profilePictureImg.style.display = 'block';
+                profilePictureIcon.style.display = 'none';
+                
+                // Sidebar avatar
+                sidebarAvatarImg.src = imageData;
+                sidebarAvatarImg.style.display = 'block';
+                sidebarAvatarIcon.style.display = 'none';
+                
+                // Show remove button
+                removePictureBtn.style.display = 'inline-flex';
+            }
+
+            // Remove profile picture
+            function removeProfilePicture() {
+                // Clear from localStorage
+                localStorage.removeItem('profilePicture');
+                
+                // Reset main profile picture
+                profilePictureImg.style.display = 'none';
+                profilePictureIcon.style.display = 'block';
+                profilePictureImg.src = '';
+                
+                // Reset sidebar avatar
+                sidebarAvatarImg.style.display = 'none';
+                sidebarAvatarIcon.style.display = 'block';
+                sidebarAvatarImg.src = '';
+                
+                // Hide remove button
+                removePictureBtn.style.display = 'none';
+                
+                // Reset file input
+                profilePictureInput.value = '';
+            }
+
+            // Upload button click
+            uploadPictureBtn.addEventListener('click', function() {
+                profilePictureInput.click();
+            });
+
+            // Overlay click
+            profilePictureOverlay.addEventListener('click', function() {
+                profilePictureInput.click();
+            });
+
+            // File input change
+            profilePictureInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                
+                if (file) {
+                    // Validate file type
+                    if (!file.type.match('image.*')) {
+                        alert('Please select an image file!');
+                        return;
+                    }
+                    
+                    // Validate file size (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('Image size should be less than 5MB!');
+                        return;
+                    }
+                    
+                    // Read and display the image
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(event) {
+                        const imageData = event.target.result;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('profilePicture', imageData);
+                        
+                        // Display the image
+                        displayProfilePicture(imageData);
+                        
+                        // Show success message
+                        console.log('Profile picture uploaded successfully!');
+                    };
+                    
+                    reader.onerror = function() {
+                        alert('Error reading file. Please try again.');
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Remove picture button click
+            removePictureBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to remove your profile picture?')) {
+                    removeProfilePicture();
+                }
+            });
+
+            // Load profile picture on page load
+            loadProfilePicture();
+        });
+    </script>
+</body>
+</html>
